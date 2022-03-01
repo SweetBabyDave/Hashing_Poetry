@@ -64,7 +64,7 @@ public class HashTable<K, V> {
         int count = 0;
         for (int i = 0; i < storage.length && count < limit; i++) {
             if (storage[i] != null && storage[i].isActive) {
-                sb.append(String.format("%d: %s\n", i, storage[i].key));
+                sb.append(String.format("%d: %s\n", i, storage[i].key + "[" + storage[i].value + "]"));
                 count++;
             }
         }

@@ -13,7 +13,7 @@ public class WordFreqInfo {
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append("Word :" + word+":");
+        sb.append("Word :" + word + ":");
         sb.append(" (" + occurCount + ") : ");
         for (Frequency f : followList) {
             sb.append(f.toString());
