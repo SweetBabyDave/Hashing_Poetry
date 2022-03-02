@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class WordFreqInfo {
     private String word;
@@ -34,6 +35,19 @@ public class WordFreqInfo {
         if (!updated) {
             followList.add(new Frequency(follow, 1));
         }
+    }
+
+    public String getFollowWord(int count) {
+        int random_int = ThreadLocalRandom.current().nextInt(0, count);
+        int k = 0;
+
+        for (Frequency frequency : followList) {
+            k += frequency.followCount;
+            if (random_int < k) {
+                return frequency.follow;
+            }
+        }
+        return null;
     }
 
     public int getOccurCount() {
