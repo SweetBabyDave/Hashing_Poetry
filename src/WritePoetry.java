@@ -16,7 +16,7 @@ public class WritePoetry {
 
         var currentWord = hashTable.find(StartWord);
         sb.append(StartWord).append(" ");
-        // Ask Dean about punctuation at the end of the 20 words if you need only 1 period or if more are okay
+
         for (int i = 0; i < length - 1; i++) {
             String followWord = currentWord.getFollowWord(currentWord.getOccurCount());
             currentWord = hashTable.find(followWord);
@@ -36,12 +36,14 @@ public class WritePoetry {
         String holder = sb.toString().trim();
         sb.setLength(0);
         sb.append(holder);
-        sb.append(".");
+        if (sb.toString().endsWith(".") || sb.toString().endsWith("?") || sb.toString().endsWith(",") || sb.toString().endsWith("!")) {
+            return sb.toString();
+        }
 
+        sb.append(".");
         return sb.toString();
     }
 
-// Ask Dean a question about having the apostrophe in the array like I have it.
     private HashTable<String, WordFreqInfo> readFile(String file) {
         File poemFile = new File(file);
         ArrayList<String> holderArray = new ArrayList<>();
@@ -51,12 +53,11 @@ public class WritePoetry {
             while (input.hasNextLine()) {
                 String word = input.nextLine().toLowerCase();
                 String[] wordList = word.split("\\b");
-                if (wordList.length != 1) {
-                    holderArray.addAll(Arrays.asList(wordList));
-                }
+                holderArray.addAll(Arrays.asList(wordList));
             }
 
             holderArray.removeAll(Collections.singleton(" "));
+            holderArray.removeAll(Collections.singleton(""));
             for (String word: holderArray) {
                 word = word.trim();
                 wordArray.add(word);
