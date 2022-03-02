@@ -1,8 +1,5 @@
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Scanner;
+import java.util.*;
 
 public class WritePoetry {
 
@@ -27,6 +24,7 @@ public class WritePoetry {
                 sb.append(holder);
                 sb.append(followWord).append("\n");
             } else if (isApostrophe(followWord)) {
+                i -= 1;
                 sb.append(followWord);
             } else {
                 sb.append(followWord).append(" ");
@@ -66,6 +64,8 @@ public class WritePoetry {
         } catch (java.io.IOException ex) {
             System.out.println("An error occurred trying to read the poem: " + ex);
         }
+
+        wordArray.removeAll(Collections.singleton(""));
 
         return buildHashTable(wordArray);
     }
